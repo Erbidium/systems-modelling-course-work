@@ -30,7 +30,7 @@ public abstract class Element {
         Name = $"element{Id}";
     }
 
-    protected double GetDelay(SimpleItem item)
+    protected virtual double GetDelay(SimpleItem item)
         => _delay.Generate(item);
     
     public virtual void Enter(SimpleItem item) { }
