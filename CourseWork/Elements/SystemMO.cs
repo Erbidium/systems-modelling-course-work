@@ -8,6 +8,7 @@ public class SystemMO : Element
     
     public double MeanQueueStat { get; private set; }
     public double LoadTimeStat { get; private set; }
+    public double NodesCountStat { get; private set; }
     public double MeanWorkingDevicesStat { get; private set; }
 
     public List<Device> Devices { get; } = new();
@@ -95,8 +96,11 @@ public class SystemMO : Element
         
         if (!IsServing)
             return;
+
+        int workingDevicesCount = Devices.Count(d => d.IsServing);
+        MeanWorkingDevicesStat += workingDevicesCount * delta;
+        NodesCountStat += (Queue.Nodes.Count + workingDevicesCount) * delta;
         
-        MeanWorkingDevicesStat += Devices.Count(d => d.IsServing) * delta;
         LoadTimeStat += delta;
         
         foreach (var node in Queue.Nodes)

@@ -53,6 +53,11 @@ public class NetMO {
     private void PrintResult()
     {
         Console.WriteLine("\n-------------RESULTS-------------");
+
+        var processes = Elements.Where(el => el is SystemMO).Select(s => (s as SystemMO)!).ToList();
+        
+        Console.WriteLine($"Average nodes count in system{processes.Sum(p => p.NodesCountStat) / _timeCurrent}");
+        Console.WriteLine();
         
         foreach (var element in Elements) {
             element.PrintResult();
