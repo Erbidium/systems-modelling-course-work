@@ -11,8 +11,8 @@ public class NodeFactory
         _repairTimeGenerator = repairTimeGenerator;
     }
     
-    public Node CreateNode(double currentTime)
+    public Node CreateNode()
     {
-        return new Node(currentTime, _repairTimeGenerator.Generate(null!));
+        return new Node(_repairTimeGenerator.Generate(null!));
     }
 }

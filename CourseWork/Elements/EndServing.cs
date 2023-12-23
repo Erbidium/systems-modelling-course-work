@@ -13,7 +13,6 @@ public sealed class EndServing : Element
 
     public override void Enter(Node node)
     {
-        node.EndServing(TimeCurrent);
         ServedNodes.Add(node);
     }
 

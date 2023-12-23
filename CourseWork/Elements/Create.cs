@@ -15,7 +15,7 @@ public sealed class Create : Element
 
     public override void Exit() {
         base.Exit();
-        var createdNode = _nodeFactory.CreateNode(TimeCurrent);
+        var createdNode = _nodeFactory.CreateNode();
         
         TimeNext = TimeCurrent + GetDelay(createdNode);
         
