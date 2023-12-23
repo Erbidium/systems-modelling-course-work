@@ -14,6 +14,7 @@ public sealed class EndServing : Element
     public override void Enter(Node node)
     {
         ServedNodes.Add(node);
+        ServedElementsQuantity++;
     }
 
     public override void DoStatistics(double delta) { }

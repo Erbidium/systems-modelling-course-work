@@ -102,6 +102,9 @@ public class NetMO {
             int count = waitingTimes.Count(f => f > rangeStart && f <= rangeEnd);
             waitingFrequencies.Add((rangeStart, rangeEnd, count));
         }
+
+        var zeroTimeCount = waitingTimes.Count(t => t == 0);
+        waitingFrequencies[0] = (waitingFrequencies[0].RangeStart, waitingFrequencies[0].RangeEnd, waitingFrequencies[0].Count + zeroTimeCount);
          
         Console.WriteLine($"Mean waiting time: {meanWaitingTime}");
         Console.WriteLine($"Waiting time standard deviation: {meanWaitingTimeStandardDeviation}");

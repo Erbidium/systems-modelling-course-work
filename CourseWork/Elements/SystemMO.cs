@@ -107,5 +107,10 @@ public class SystemMO : Element
         {
             node.TimeSpentInQueue += delta;
         }
+
+        foreach (var device in Devices)
+        {
+            device.DoStatistics(delta);
+        }
     }
 }
