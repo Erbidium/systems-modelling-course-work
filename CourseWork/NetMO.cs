@@ -58,6 +58,32 @@ public class NetMO {
         
         Console.WriteLine($"Average nodes count in system{processes.Sum(p => p.NodesCountStat) / _timeCurrent}");
         Console.WriteLine();
+
+        var endServing = (Elements.First(el => el is EndServing) as EndServing)!;
+        var repairQualities = endServing.ServedNodes.Select(n => n.ReturnsCount == 0 ? 1 : 1.0 / n.ReturnsCount).ToList();
+        
+        var meanRepairQuality = repairQualities.Average();
+        
+        var repairQualityStandardDeviation = repairQualities.Sum(q => Math.Pow(q - meanRepairQuality, 2)) / repairQualities.Count;
+
+        var frequencyRange = 0.2;
+        var repairFrequencies = new List<(double RangeStart, double RangeEnd, int Count)>();
+        for (double i = 0; i <= 1 - frequencyRange; i += 0.2)
+        {
+            var rangeStart = i;
+            var rangeEnd = i + frequencyRange;
+
+            int count = repairQualities.Count(f => f > rangeStart && f <= rangeEnd);
+            repairFrequencies.Add((rangeStart, rangeEnd, count));
+        }
+        
+        Console.WriteLine($"Mean repair quality: {meanRepairQuality}");
+        Console.WriteLine($"Repair quality standard deviation: {repairQualityStandardDeviation}");
+        Console.WriteLine("Repair frequencies:");
+        foreach (var repairFrequency in repairFrequencies)
+        {
+            Console.WriteLine($"{repairFrequency.RangeStart:0.0} - {repairFrequency.RangeEnd:0.0} : {repairFrequency.Count}");
+        }
         
         foreach (var element in Elements) {
             element.PrintResult();

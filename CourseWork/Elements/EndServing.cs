@@ -15,7 +15,6 @@ public sealed class EndServing : Element
     {
         node.EndServing(TimeCurrent);
         ServedNodes.Add(node);
-        ServedElementsQuantity++;
     }
 
     public override void DoStatistics(double delta) { }
