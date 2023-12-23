@@ -1,6 +1,7 @@
 ﻿using Lab3.Delays;
 using Lab3.Elements;
 using Lab3.ItemFactories;
+using Lab3.Items;
 using Lab3.NextElement;
 using Lab3.Queues;
 
@@ -25,9 +26,10 @@ public static class ModelCreator
 
         nodeCreator.NextElement = new OneNextElementPicker(repairDepartment);
         repairDepartment.NextElement = new OneNextElementPicker(controlDepartment);
-        controlDepartment.NextElement = new WeightedNextElementPicker
+        controlDepartment.NextElement = new NodeFinishingPicker
         {
-            NextElementChances = { (repairDepartment, 0.15), (endServing, 0.85) }
+            RepairDepartment = repairDepartment,
+            EndServing = endServing
         };
 
         var elements = new List<Element> { nodeCreator, repairDepartment, controlDepartment, endServing };

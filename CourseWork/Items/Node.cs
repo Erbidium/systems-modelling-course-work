@@ -8,6 +8,8 @@ public class Node : SimpleItem
     
     public double RepairTime { get;  }
 
+    public int ReturnsCount { get; set; } = 0;
+
     public double FinishServingTime { get; private set; }
 
     public Node(double currentTime, double repairTime)
