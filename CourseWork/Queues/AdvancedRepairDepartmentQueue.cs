@@ -1,21 +1,18 @@
-﻿using Lab3.Items;
-
-namespace Lab3.Queues;
+﻿namespace Lab3.Queues;
 
 public class AdvancedRepairDepartmentQueue : RepairDepartmentQueue
 {
-    public override SimpleItem Remove()
+    public override Node Remove()
     {
-        var nodes = Items.Select(i => (i as Node)!).ToList();
-        var returnedItems = nodes.Where(n => n.ReturnsCount > 0).ToList();
+        var returnedNodes = Nodes.Where(n => n.ReturnsCount > 0).ToList();
 
-        if (returnedItems.Count == 0)
+        if (returnedNodes.Count == 0)
         {
             return base.Remove();
         }
         
-        var itemToRemove = returnedItems.MaxBy(n => n.ReturnsCount * n.RepairTime)!;
-        Items.Remove(itemToRemove);
-        return itemToRemove;
+        var nodeToRemove = returnedNodes.MaxBy(n => n.ReturnsCount * n.RepairTime)!;
+        Nodes.Remove(nodeToRemove);
+        return nodeToRemove;
     }
 }

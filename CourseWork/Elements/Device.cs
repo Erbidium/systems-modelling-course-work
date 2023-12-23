@@ -1,29 +1,28 @@
 ﻿using Lab3.Delays;
-using Lab3.Items;
 
 namespace Lab3.Elements;
 
 public sealed class Device : Element
 {
-    public SimpleItem? ProcessedItem { get; set; }
+    public Node? ProcessedNode { get; set; }
     
     public Device(IDelay delay) : base(delay)
     {
         TimeNext = double.MaxValue;
     }
     
-    public override void Enter(SimpleItem item)
+    public override void Enter(Node node)
     {
         IsServing = true;
-        TimeNext = TimeCurrent + GetDelay(item);
-        ProcessedItem = item;
+        TimeNext = TimeCurrent + GetDelay(node);
+        ProcessedNode = node;
     }
 
     public override void Exit()
     {
         IsServing = false;
         TimeNext = double.MaxValue;
-        ProcessedItem = null;
+        ProcessedNode = null;
         base.Exit();
     }
 

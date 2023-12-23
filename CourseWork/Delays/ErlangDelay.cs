@@ -1,6 +1,4 @@
-﻿using Lab3.Items;
-
-namespace Lab3.Delays;
+﻿namespace Lab3.Delays;
 
 public class ErlangDelay : IDelay
 {
@@ -15,7 +13,7 @@ public class ErlangDelay : IDelay
         _k = k;
     }
     
-    public double Generate(SimpleItem item)
+    public double Generate(Node node)
     {
         double randomGeneratedProduct = 1.0;
 

@@ -1,5 +1,4 @@
 ﻿using Lab3.Delays;
-using Lab3.Items;
 using Lab3.NextElement;
 using Lab3.Queues;
 
@@ -30,10 +29,10 @@ public abstract class Element {
         Name = $"element{Id}";
     }
 
-    protected virtual double GetDelay(SimpleItem item)
-        => _delay.Generate(item);
+    protected virtual double GetDelay(Node node)
+        => _delay.Generate(node);
     
-    public virtual void Enter(SimpleItem item) { }
+    public virtual void Enter(Node node) { }
     
     public virtual void Exit()
         => ServedElementsQuantity++;

@@ -1,6 +1,6 @@
 ﻿namespace Lab3.ModelStats;
 
-public class ModelStats : IModelStatsPrinter
+public class ModelStats
 {
     private readonly NetMO _model;
     

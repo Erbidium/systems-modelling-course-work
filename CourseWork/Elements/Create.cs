@@ -1,26 +1,25 @@
 ﻿using Lab3.Delays;
-using Lab3.ItemFactories;
 
 namespace Lab3.Elements;
 
 public sealed class Create : Element
 {
-    private readonly IItemFactory _itemFactory;
+    private readonly NodeFactory _nodeFactory;
     
-    public Create(IDelay delay, IItemFactory itemFactory) : base(delay)
+    public Create(IDelay delay, NodeFactory nodeFactory) : base(delay)
     {
         TimeNext = 0.0; // імітація розпочнеться з події Create
 
-        _itemFactory = itemFactory;
+        _nodeFactory = nodeFactory;
     }
 
     public override void Exit() {
         base.Exit();
-        var createdItem = _itemFactory.CreateItem(TimeCurrent);
+        var createdNode = _nodeFactory.CreateNode(TimeCurrent);
         
-        TimeNext = TimeCurrent + GetDelay(createdItem);
+        TimeNext = TimeCurrent + GetDelay(createdNode);
         
-        NextElement?.NextElement(createdItem)?.Enter(createdItem);
+        NextElement?.NextElement(createdNode)?.Enter(createdNode);
     }
 
     public override void DoStatistics(double delta) { }

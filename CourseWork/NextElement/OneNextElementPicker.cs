@@ -1,5 +1,4 @@
 ﻿using Lab3.Elements;
-using Lab3.Items;
 
 namespace Lab3.NextElement;
 
@@ -11,7 +10,7 @@ public class OneNextElementPicker : INextElementPicker
         _nextElement = nextElement;
     }
 
-    public Element NextElement(SimpleItem item)
+    public Element NextElement(Node node)
     {
         return _nextElement;
     }

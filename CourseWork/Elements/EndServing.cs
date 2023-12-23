@@ -1,24 +1,20 @@
 ﻿using Lab3.Delays;
-using Lab3.Items;
 
 namespace Lab3.Elements;
 
 public sealed class EndServing : Element
 {
-    public List<Node> ServedPatients { get; } = new();
+    public List<Node> ServedNodes { get; } = new();
 
     public EndServing(IDelay delay) : base(delay)
     {
         TimeNext = double.MaxValue;
     }
 
-    public override void Enter(SimpleItem item)
+    public override void Enter(Node node)
     {
-        if (item is not Node patient)
-            return;
-        
-        patient.EndServing(TimeCurrent);
-        ServedPatients.Add(patient);
+        node.EndServing(TimeCurrent);
+        ServedNodes.Add(node);
         ServedElementsQuantity++;
     }
 

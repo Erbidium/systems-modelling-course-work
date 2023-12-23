@@ -1,9 +1,8 @@
 ﻿using Lab3.Delays;
-using Lab3.Items;
 
-namespace Lab3.ItemFactories;
+namespace Lab3;
 
-public class NodeFactory : IItemFactory
+public class NodeFactory
 {
     private readonly IDelay _repairTimeGenerator;
     
@@ -12,7 +11,7 @@ public class NodeFactory : IItemFactory
         _repairTimeGenerator = repairTimeGenerator;
     }
     
-    public SimpleItem CreateItem(double currentTime)
+    public Node CreateNode(double currentTime)
     {
         return new Node(currentTime, _repairTimeGenerator.Generate(null!));
     }

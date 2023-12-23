@@ -1,5 +1,4 @@
 ﻿using Lab3.Delays;
-using Lab3.Items;
 
 namespace Lab3.Elements;
 
@@ -40,16 +39,16 @@ public class SystemMO : Element
             Devices.Add(new Device(delay));
     }
     
-    public override void Enter(SimpleItem item)
+    public override void Enter(Node node)
     {
         if (!IsFull)
         {
             var freeDevice = Devices.First(d => !d.IsServing);
-            freeDevice.Enter(item);
+            freeDevice.Enter(node);
         }
-        else if (Queue.Items.Count < Queue.MaxCount)
+        else if (Queue.Nodes.Count < Queue.MaxCount)
         {
-            Queue.Add(item);
+            Queue.Add(node);
         }
         else
         {
@@ -65,16 +64,16 @@ public class SystemMO : Element
 
         foreach (var device in finishedDevices)
         {
-            SimpleItem processedItem = device.ProcessedItem!;
+            Node processedNode = device.ProcessedNode!;
             device.Exit();
             
-            if (Queue.Items.Count > 0)
+            if (Queue.Nodes.Count > 0)
             {
-                var itemFromQueue = Queue.Remove();
-                device.Enter(itemFromQueue);
+                var nodeFromQueue = Queue.Remove();
+                device.Enter(nodeFromQueue);
             }
             
-            NextElement?.NextElement(processedItem)?.Enter(processedItem);
+            NextElement?.NextElement(processedNode)?.Enter(processedNode);
         }
     }
 
@@ -92,7 +91,7 @@ public class SystemMO : Element
 
     public override void DoStatistics(double delta)
     {
-        MeanQueueStat += Queue.Items.Count * delta;
+        MeanQueueStat += Queue.Nodes.Count * delta;
         
         if (!IsServing)
             return;

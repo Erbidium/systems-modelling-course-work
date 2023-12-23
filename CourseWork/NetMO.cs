@@ -1,6 +1,4 @@
 ﻿using Lab3.Elements;
-using Lab3.ModelStats;
-using Lab3.NextElement;
 
 namespace Lab3;
 
@@ -14,11 +12,11 @@ public class NetMO {
     public NetMO(List<Element> elements)
         => Elements = elements;
 
-    public void Simulate(double time, IModelStatsPrinter? statsPrinter = null)
+    public void Simulate(double time, ModelStats.ModelStats statsPrinter)
     {
         while (_timeCurrent < time)
         {
-            _timeNext = Elements.Select(e => e.TimeNext).Min();
+            _timeNext = Elements.Min(e => e.TimeNext);
             
             Elements.ForEach(e => e.DoStatistics(_timeNext - _timeCurrent));
             statsPrinter?.DoStatistics(_timeNext - _timeCurrent);

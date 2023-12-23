@@ -1,14 +1,12 @@
-﻿using Lab3.Items;
-
-namespace Lab3.Queues;
+﻿namespace Lab3.Queues;
 
 public class ControlDepartmentQueue : Queue
 {
-    public override SimpleItem Remove()
+    public override Node Remove()
     {
-        var itemToRemove = Items[0];
-        Items.RemoveAt(0);
+        var nodeToRemove = Nodes[0];
+        Nodes.RemoveAt(0);
 
-        return itemToRemove;
+        return nodeToRemove;
     }
 }

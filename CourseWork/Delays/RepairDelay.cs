@@ -1,11 +1,9 @@
-﻿using Lab3.Items;
-
-namespace Lab3.Delays;
+﻿namespace Lab3.Delays;
 
 public class RepairDelay : IDelay
 {
-    public double Generate(SimpleItem item)
+    public double Generate(Node node)
     {
-        return (item as Node)!.RepairTime;
+        return node.RepairTime;
     }
 }

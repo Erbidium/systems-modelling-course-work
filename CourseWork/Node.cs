@@ -1,14 +1,12 @@
-﻿using Lab3.Delays;
+﻿namespace Lab3;
 
-namespace Lab3.Items;
-
-public class Node : SimpleItem
+public class Node
 {
     public double CreationTime { get; }
     
     public double RepairTime { get;  }
 
-    public int ReturnsCount { get; set; } = 0;
+    public int ReturnsCount { get; set; }
 
     public double FinishServingTime { get; private set; }
 

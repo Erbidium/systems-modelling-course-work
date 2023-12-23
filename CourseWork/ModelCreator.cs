@@ -1,7 +1,5 @@
 ﻿using Lab3.Delays;
 using Lab3.Elements;
-using Lab3.ItemFactories;
-using Lab3.Items;
 using Lab3.NextElement;
 using Lab3.Queues;
 
@@ -20,15 +18,15 @@ public static class ModelCreator
             Queue = new RepairDepartmentQueue()
         };
 
-        var repairedItem1 = nodeFactory.CreateItem(0);
+        var repairedNode1 = nodeFactory.CreateNode(0);
         repairDepartment.Devices[0].IsServing = true;
-        repairDepartment.Devices[0].TimeNext = (repairedItem1 as Node)!.RepairTime;
-        repairDepartment.Devices[0].ProcessedItem = repairedItem1;
+        repairDepartment.Devices[0].TimeNext = repairedNode1.RepairTime;
+        repairDepartment.Devices[0].ProcessedNode = repairedNode1;
         
-        var repairedItem2 = nodeFactory.CreateItem(0);
+        var repairedNode2 = nodeFactory.CreateNode(0);
         repairDepartment.Devices[1].IsServing = true;
-        repairDepartment.Devices[1].TimeNext = (repairedItem2 as Node)!.RepairTime;
-        repairDepartment.Devices[1].ProcessedItem = repairedItem2;
+        repairDepartment.Devices[1].TimeNext = repairedNode2.RepairTime;
+        repairDepartment.Devices[1].ProcessedNode = repairedNode2;
         
         
         var controlDepartment = new SystemMO(new ConstantDelay(6), 1)

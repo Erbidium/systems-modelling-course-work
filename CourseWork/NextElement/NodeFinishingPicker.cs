@@ -1,19 +1,17 @@
 ﻿using Lab3.Elements;
-using Lab3.Items;
 
 namespace Lab3.NextElement;
 
 public class NodeFinishingPicker : INextElementPicker
 {
-    public required SystemMO RepairDepartment { get; set; }
+    public required SystemMO RepairDepartment { get; init; }
     
-    public required Element EndServing { get; set; }
+    public required Element EndServing { get; init; }
     
     private readonly Random _rand = new();
 
-    public Element NextElement(SimpleItem item)
+    public Element NextElement(Node node)
     {
-        var node = (item as Node)!;
         var finishingProbability = node.ReturnsCount == 0 ? 0.15 : Math.Pow(0.15, node.ReturnsCount);
         var endServingProbability = 1 - finishingProbability;
         
