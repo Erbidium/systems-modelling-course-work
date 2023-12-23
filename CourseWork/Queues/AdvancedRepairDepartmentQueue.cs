@@ -11,7 +11,7 @@ public class AdvancedRepairDepartmentQueue : RepairDepartmentQueue
             return base.Remove();
         }
         
-        var nodeToRemove = returnedNodes.MaxBy(n => n.ReturnsCount * n.RepairTime)!;
+        var nodeToRemove = returnedNodes.MaxBy(n => n.ReturnsCount * n.RepairTime + n.TimeSpentInQueue)!;
         Nodes.Remove(nodeToRemove);
         return nodeToRemove;
     }

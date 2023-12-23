@@ -98,5 +98,10 @@ public class SystemMO : Element
         
         MeanWorkingDevicesStat += Devices.Count(d => d.IsServing) * delta;
         LoadTimeStat += delta;
+        
+        foreach (var node in Queue.Nodes)
+        {
+            node.TimeSpentInQueue += delta;
+        }
     }
 }

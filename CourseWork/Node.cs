@@ -9,6 +9,8 @@ public class Node
     public int ReturnsCount { get; set; }
 
     public double FinishServingTime { get; private set; }
+    
+    public double TimeSpentInQueue { get; set; }
 
     public Node(double currentTime, double repairTime)
     {
