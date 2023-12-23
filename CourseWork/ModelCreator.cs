@@ -11,7 +11,7 @@ public static class ModelCreator
     {
         var repairTimeDelayGenerator = new ErlangDelay(22, 242);
         var nodeFactory = new NodeFactory(repairTimeDelayGenerator);
-        var nodeCreator = new Create(new ExponentialDelay(10.25), nodeFactory) { Name = "NODE_CREATOR" };
+        var nodeCreator = new Create(new ExponentialDelay(10.25), nodeFactory) { Name = "NODE_CREATOR", ServedElementsQuantity = 2 };
         var repairDepartment = new SystemMO(new RepairDelay(), 3)
         {
             Name = "REPAIR_DEPARTMENT",

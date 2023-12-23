@@ -86,7 +86,7 @@ public class SystemMO : Element
     public override void PrintInfo()
     {
         base.PrintInfo();
-        // Console.WriteLine("Failure quantity = " + Failure);
+        Console.WriteLine("Failure quantity = " + Failure);
     }
 
     public override void DoStatistics(double delta)

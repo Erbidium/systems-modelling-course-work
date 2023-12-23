@@ -10,7 +10,7 @@ public abstract class Element {
     public virtual double TimeCurrent { get; set; }
     public virtual double TimeNext { get; set; } = double.MaxValue;
 
-    public int ServedElementsQuantity { get; protected set; }
+    public int ServedElementsQuantity { get; set; }
     
     public INextElementPicker? NextElement { get; set; }
 
@@ -42,7 +42,7 @@ public abstract class Element {
 
     public virtual void PrintInfo()
     {
-        // Console.WriteLine($"{Name} is {(IsServing ? "serving" : "waiting")}. Served quantity = {ServedElementsQuantity} TimeNext = {TimeNext}");
+        Console.WriteLine($"{Name} is {(IsServing ? "serving" : "waiting")}. Served quantity = {ServedElementsQuantity} TimeNext = {TimeNext}");
     }
 
     public abstract void DoStatistics(double delta);
