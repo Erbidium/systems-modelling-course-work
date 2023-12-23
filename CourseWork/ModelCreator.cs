@@ -11,12 +11,26 @@ public static class ModelCreator
 {
     public static NetMO CreateMachineRepairWorkshopModel()
     {
-        var nodeCreator = new Create(new ExponentialDelay(10.25), new NodeFactory(new ErlangDelay(22, 242))) { Name = "NODE_CREATOR" };
+        var repairTimeDelayGenerator = new ErlangDelay(22, 242);
+        var nodeFactory = new NodeFactory(repairTimeDelayGenerator);
+        var nodeCreator = new Create(new ExponentialDelay(10.25), nodeFactory) { Name = "NODE_CREATOR" };
         var repairDepartment = new SystemMO(new RepairDelay(), 3)
         {
             Name = "REPAIR_DEPARTMENT",
             Queue = new RepairDepartmentQueue()
         };
+
+        var repairedItem1 = nodeFactory.CreateItem(0);
+        repairDepartment.Devices[0].IsServing = true;
+        repairDepartment.Devices[0].TimeNext = (repairedItem1 as Node)!.RepairTime;
+        repairDepartment.Devices[0].ProcessedItem = repairedItem1;
+        
+        var repairedItem2 = nodeFactory.CreateItem(0);
+        repairDepartment.Devices[1].IsServing = true;
+        repairDepartment.Devices[1].TimeNext = (repairedItem2 as Node)!.RepairTime;
+        repairDepartment.Devices[1].ProcessedItem = repairedItem2;
+        
+        
         var controlDepartment = new SystemMO(new ConstantDelay(6), 1)
         {
             Name = "CONTROL_DEPARTMENT",
