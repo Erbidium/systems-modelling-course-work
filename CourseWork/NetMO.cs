@@ -12,14 +12,13 @@ public class NetMO {
     public NetMO(List<Element> elements)
         => Elements = elements;
 
-    public void Simulate(double time, ModelStats.ModelStats statsPrinter)
+    public void Simulate(double time)
     {
         while (_timeCurrent < time)
         {
             _timeNext = Elements.Min(e => e.TimeNext);
             
             Elements.ForEach(e => e.DoStatistics(_timeNext - _timeCurrent));
-            statsPrinter.DoStatistics(_timeNext - _timeCurrent);
             
             _timeCurrent = _timeNext;
 
@@ -39,7 +38,6 @@ public class NetMO {
             PrintInfo();
         }
         PrintResult();
-        statsPrinter.PrintModelStats(_timeCurrent);
     }
 
     private void PrintInfo()
@@ -60,10 +58,11 @@ public class NetMO {
         Console.WriteLine();
 
         var endServing = (Elements.First(el => el is EndServing) as EndServing)!;
+        
+        
         var repairQualities = endServing.ServedNodes.Select(n => n.ReturnsCount == 0 ? 1 : 1.0 / n.ReturnsCount).ToList();
         
         var meanRepairQuality = repairQualities.Average();
-        
         var repairQualityStandardDeviation = repairQualities.Sum(q => Math.Pow(q - meanRepairQuality, 2)) / repairQualities.Count;
 
         var frequencyRange = 0.2;
@@ -83,6 +82,33 @@ public class NetMO {
         foreach (var repairFrequency in repairFrequencies)
         {
             Console.WriteLine($"{repairFrequency.RangeStart:0.0} - {repairFrequency.RangeEnd:0.0} : {repairFrequency.Count}");
+        }
+        
+        var waitingTimes = endServing.ServedNodes.Select(n => n.TimeSpentInQueue).ToList();
+        
+        var meanWaitingTime = waitingTimes.Average();
+        var meanWaitingTimeStandardDeviation = repairQualities.Sum(q => Math.Pow(q - meanWaitingTime, 2)) / waitingTimes.Count;
+        
+        var waitingTimeRangesCount = 4;
+        var maxWaitingTime = waitingTimes.Max();
+        
+        var waitingTimeRange = maxWaitingTime / waitingTimeRangesCount;
+        var waitingFrequencies = new List<(double RangeStart, double RangeEnd, int Count)>();
+        for (double i = 0; i <= maxWaitingTime; i += waitingTimeRange)
+        {
+            var rangeStart = i;
+            var rangeEnd = i + waitingTimeRange;
+
+            int count = waitingTimes.Count(f => f > rangeStart && f <= rangeEnd);
+            waitingFrequencies.Add((rangeStart, rangeEnd, count));
+        }
+         
+        Console.WriteLine($"Mean waiting time: {meanWaitingTime}");
+        Console.WriteLine($"Waiting time standard deviation: {meanWaitingTimeStandardDeviation}");
+        Console.WriteLine("Waiting frequencies:");
+        foreach (var waitingFrequency in waitingFrequencies)
+        {
+            Console.WriteLine($"{waitingFrequency.RangeStart:0.0} - {waitingFrequency.RangeEnd:0.0} : {waitingFrequency.Count}");
         }
         
         foreach (var element in Elements) {
