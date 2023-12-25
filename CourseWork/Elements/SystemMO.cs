@@ -1,10 +1,13 @@
 ﻿using Lab3.Delays;
+using Lab3.Queues;
 
 namespace Lab3.Elements;
 
 public class SystemMO : Element
 {
     public int Failure { get; private set; }
+    
+    public Queue Queue { get; set; } = new();
     
     public double MeanQueueStat { get; private set; }
     public double LoadTimeStat { get; private set; }

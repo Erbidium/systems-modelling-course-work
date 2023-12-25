@@ -30,6 +30,9 @@ public sealed class Device : Element
 
     public override void DoStatistics(double delta)
     {
+        if (!IsServing)
+            return;
+        
         LoadTimeStat += delta;
     }
 }

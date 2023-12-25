@@ -18,12 +18,12 @@ public static class ModelCreator
             Queue = new RepairDepartmentQueue()
         };
 
-        var repairedNode1 = nodeFactory.CreateNode();
+        var repairedNode1 = nodeFactory.CreateNode(1);
         repairDepartment.Devices[0].IsServing = true;
         repairDepartment.Devices[0].TimeNext = repairedNode1.RepairTime;
         repairDepartment.Devices[0].ProcessedNode = repairedNode1;
         
-        var repairedNode2 = nodeFactory.CreateNode();
+        var repairedNode2 = nodeFactory.CreateNode(1.5);
         repairDepartment.Devices[1].IsServing = true;
         repairDepartment.Devices[1].TimeNext = repairedNode2.RepairTime;
         repairDepartment.Devices[1].ProcessedNode = repairedNode2;

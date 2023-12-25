@@ -9,17 +9,10 @@ public abstract class Element {
     public string Name { get; set; }
     public virtual double TimeCurrent { get; set; }
     public virtual double TimeNext { get; set; } = double.MaxValue;
-
     public int ServedElementsQuantity { get; set; }
-    
     public INextElementPicker? NextElement { get; set; }
-
-    public Queue Queue { get; set; } = new();
-    
     public virtual bool IsServing { get; set; }
-
     public virtual bool IsFull => IsServing;
-
     private readonly IDelay _delay;
     
     protected Element(IDelay delay)

@@ -59,7 +59,6 @@ public class NetMO {
 
         var endServing = (Elements.First(el => el is EndServing) as EndServing)!;
         
-        
         var repairQualities = endServing.ServedNodes.Select(n => n.ReturnsCount == 0 ? 1 : 1.0 / n.ReturnsCount).ToList();
         
         var meanRepairQuality = repairQualities.Average();
