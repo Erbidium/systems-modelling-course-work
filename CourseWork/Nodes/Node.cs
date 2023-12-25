@@ -1,4 +1,4 @@
-﻿namespace Lab3;
+﻿namespace Lab3.Nodes;
 
 public class Node
 {

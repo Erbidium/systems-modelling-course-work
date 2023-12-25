@@ -1,6 +1,7 @@
 ﻿using Lab3.Delays;
 using Lab3.Elements;
 using Lab3.NextElement;
+using Lab3.Nodes;
 using Lab3.Queues;
 
 namespace Lab3;

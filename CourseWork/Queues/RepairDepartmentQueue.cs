@@ -1,4 +1,6 @@
-﻿namespace Lab3.Queues;
+﻿using Lab3.Nodes;
+
+namespace Lab3.Queues;
 
 public class RepairDepartmentQueue : Queue
 {

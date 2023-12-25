@@ -1,7 +1,17 @@
 ﻿using Lab3;
 
 const int simulationTime = 10000;
+const int timesToRunSimulation = 100;
 
-var model = ModelCreator.CreateMachineRepairWorkshopModel();
+var simulationResults = SimulationRunner.RunModelSimulationMultipleTimes(simulationTime, timesToRunSimulation);
+Console.WriteLine($"Simulation was repeated {timesToRunSimulation} times");
+Results.PrintModelResults(simulationResults);
 
-model.Simulate(simulationTime);
+// var model = ModelCreator.CreateMachineRepairWorkshopModel();
+// var simulationResults = model.Simulate(simulationTime);
+// Results.PrintModelResults(simulationResults, model);
+
+
+
+
+

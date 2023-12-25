@@ -1,4 +1,5 @@
 ﻿using Lab3.Elements;
+using Lab3.Nodes;
 
 namespace Lab3.NextElement;
 

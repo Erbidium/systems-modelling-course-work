@@ -1,4 +1,5 @@
 ﻿using Lab3.Delays;
+using Lab3.Nodes;
 using Lab3.Queues;
 
 namespace Lab3.Elements;
@@ -79,18 +80,6 @@ public class SystemMO : Element
             
             NextElement?.NextElement(processedNode)?.Enter(processedNode);
         }
-    }
-
-    public override void PrintResult()
-    {
-        base.PrintResult();
-        Console.WriteLine("Failure quantity = " + Failure);
-    }
-    
-    public override void PrintInfo()
-    {
-        base.PrintInfo();
-        Console.WriteLine("Failure quantity = " + Failure);
     }
 
     public override void DoStatistics(double delta)

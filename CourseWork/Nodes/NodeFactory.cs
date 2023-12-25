@@ -1,6 +1,6 @@
 ﻿using Lab3.Delays;
 
-namespace Lab3;
+namespace Lab3.Nodes;
 
 public class NodeFactory
 {

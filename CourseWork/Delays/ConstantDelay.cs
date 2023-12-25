@@ -1,4 +1,6 @@
-﻿namespace Lab3.Delays;
+﻿using Lab3.Nodes;
+
+namespace Lab3.Delays;
 
 public class ConstantDelay : IDelay
 {
