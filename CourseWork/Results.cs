@@ -23,6 +23,7 @@ public static class Results
             }
         }
 
+        Console.WriteLine();
         PrintValueForKey(ResultKeys.AverageNodesCount);
         Console.WriteLine();
 
