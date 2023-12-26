@@ -17,13 +17,13 @@ public class ErlangDelay : IDelay
     
     public double Generate(Node node)
     {
-        double randomGeneratedProduct = 1.0;
+        double erlangGeneratedValue = 0;
 
         for (int i = 0; i < _k; i++)
         {
-            randomGeneratedProduct *= _random.NextDouble();
+            erlangGeneratedValue += Math.Log(_random.NextDouble());
         }
 
-        return -Math.Log(randomGeneratedProduct) / _timeMean / _k;
+        return -erlangGeneratedValue / _timeMean;
     }
 }
