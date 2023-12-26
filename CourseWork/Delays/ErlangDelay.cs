@@ -24,6 +24,6 @@ public class ErlangDelay : IDelay
             erlangGeneratedValue += Math.Log(_random.NextDouble());
         }
 
-        return -erlangGeneratedValue / _timeMean;
+        return -erlangGeneratedValue * _timeMean;
     }
 }
