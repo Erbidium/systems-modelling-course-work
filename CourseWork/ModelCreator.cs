@@ -1,4 +1,4 @@
-﻿using Lab3.Delays;
+using Lab3.Delays;
 using Lab3.Elements;
 using Lab3.NextElement;
 using Lab3.Nodes;
@@ -39,7 +39,7 @@ public static class ModelCreator
 
         nodeCreator.NextElement = new OneNextElementPicker(repairDepartment);
         repairDepartment.NextElement = new OneNextElementPicker(controlDepartment);
-        controlDepartment.NextElement = new NodeFinishingPicker
+        controlDepartment.NextElement = new NodeFinishingPicker(0.15)
         {
             RepairDepartment = repairDepartment,
             EndServing = endServing

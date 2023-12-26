@@ -11,9 +11,19 @@ public class NodeFinishingPicker : INextElementPicker
     
     private readonly Random _rand = new();
 
+    private double _baseReturnProbability;
+
+    public NodeFinishingPicker(double baseReturnProbability)
+    {
+        _baseReturnProbability = baseReturnProbability;
+    }
+
     public Element NextElement(Node node)
     {
-        var finishingProbability = node.ReturnsCount == 0 ? 0.15 : Math.Pow(0.15, node.ReturnsCount);
+        var finishingProbability = node.ReturnsCount == 0
+            ? _baseReturnProbability
+            : Math.Pow(_baseReturnProbability, node.ReturnsCount);
+        
         var endServingProbability = 1 - finishingProbability;
         
         var element = RandomHelper.GetWeightedRandomValue(new List<(Element, double)>()
