@@ -10,7 +10,6 @@ public class SystemMO : Element
     
     public Queue Queue { get; set; } = new();
     
-    public double MeanQueueStat { get; private set; }
     public double LoadTimeStat { get; private set; }
     public double NodesCountStat { get; private set; }
     public double MeanWorkingDevicesStat { get; private set; }
@@ -36,7 +35,7 @@ public class SystemMO : Element
 
     public override bool IsServing => Devices.Any(d => d.IsServing);
 
-    public override bool IsFull => Devices.All(d => d.IsServing);
+    public bool IsFull => Devices.All(d => d.IsServing);
 
     public SystemMO(IDelay delay, int devicesCount) : base(delay)
     {
@@ -84,8 +83,6 @@ public class SystemMO : Element
 
     public override void DoStatistics(double delta)
     {
-        MeanQueueStat += Queue.Nodes.Count * delta;
-        
         if (!IsServing)
             return;
 

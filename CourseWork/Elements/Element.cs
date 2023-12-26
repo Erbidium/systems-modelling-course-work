@@ -1,7 +1,6 @@
 ﻿using Lab3.Delays;
 using Lab3.NextElement;
 using Lab3.Nodes;
-using Lab3.Queues;
 
 namespace Lab3.Elements;
 
@@ -13,7 +12,7 @@ public abstract class Element {
     public int ServedElementsQuantity { get; set; }
     public INextElementPicker? NextElement { get; set; }
     public virtual bool IsServing { get; set; }
-    public virtual bool IsFull => IsServing;
+
     private readonly IDelay _delay;
     
     protected Element(IDelay delay)
@@ -23,7 +22,7 @@ public abstract class Element {
         Name = $"element{Id}";
     }
 
-    protected virtual double GetDelay(Node node)
+    protected double GetDelay(Node node)
         => _delay.Generate(node);
     
     public virtual void Enter(Node node) { }
