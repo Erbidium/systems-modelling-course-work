@@ -4,15 +4,15 @@ namespace Lab3.Delays;
 
 public class ErlangDelay : IDelay
 {
-    private readonly double _timeMean;
+    private readonly double _lambda;
     private readonly int _k;
 
     private readonly Random _random = new();
 
-    public ErlangDelay(double timeMean, int k)
+    public ErlangDelay(double timeMean, int variance)
     {
-        _timeMean = timeMean;
-        _k = k;
+        _lambda = timeMean / variance;
+        _k = (int)(timeMean * _lambda);
     }
     
     public double Generate(Node node)
@@ -24,6 +24,6 @@ public class ErlangDelay : IDelay
             erlangGeneratedValue += Math.Log(_random.NextDouble());
         }
 
-        return -erlangGeneratedValue * _timeMean;
+        return - erlangGeneratedValue / _lambda;
     }
 }

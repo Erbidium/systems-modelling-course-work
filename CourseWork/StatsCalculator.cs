@@ -39,7 +39,7 @@ public static class StatsCalculator
     public static List<(double RangeStart, double RangeEnd, int Count)> GetWaitingFrequencies(NetMO model)
     {
         var waitingTimeRangesCount = 4;
-        var waitingTimes = StatsCalculator.GetWaitingTimes(model);
+        var waitingTimes = GetWaitingTimes(model);
         var maxWaitingTime = waitingTimes.Max();
 
         var waitingTimeRange = maxWaitingTime / waitingTimeRangesCount;
