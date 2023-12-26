@@ -6,9 +6,7 @@ namespace Lab3.Elements;
 
 public class SystemMO : Element
 {
-    public int Failure { get; private set; }
-    
-    public Queue Queue { get; set; } = new();
+    public Queue Queue { get; init; } = new();
     
     public double LoadTimeStat { get; private set; }
     public double NodesCountStat { get; private set; }
@@ -53,10 +51,6 @@ public class SystemMO : Element
         else if (Queue.Nodes.Count < Queue.MaxCount)
         {
             Queue.Add(node);
-        }
-        else
-        {
-            Failure++;
         }
     }
 
