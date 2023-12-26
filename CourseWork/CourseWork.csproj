@@ -7,13 +7,6 @@
         <Nullable>enable</Nullable>
         <RootNamespace>Lab3</RootNamespace>
 
-
-
-
-    <ItemGroup>
-      <PackageReference Include="ScottPlot" Version="5.0.10-beta" />
-    </ItemGroup>
-
     </PropertyGroup>
 
 
