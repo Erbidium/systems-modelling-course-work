@@ -9,7 +9,7 @@ public sealed class Create : Element
 
     public List<(double SimulationTime, double AverageWaitingTime)> WaitingTimeSimulationStatistics { get; } = new();
 
-    private readonly List<Node> _allNodes = new();
+    public List<Node> AllNodes { get; }= new();
     
     private const int WaitingTimeStep = 5;
     
@@ -23,7 +23,7 @@ public sealed class Create : Element
     public override void Exit() {
         base.Exit();
         var createdNode = _nodeFactory.CreateNode();
-        _allNodes.Add(createdNode);
+        AllNodes.Add(createdNode);
         
         TimeNext = TimeCurrent + GetDelay(createdNode);
         
@@ -34,9 +34,9 @@ public sealed class Create : Element
     {
         if ((WaitingTimeSimulationStatistics.Count == 0
             || TimeCurrent - WaitingTimeSimulationStatistics[^1].SimulationTime >= WaitingTimeStep)
-            && _allNodes.Count > 0)
+            && AllNodes.Count > 0)
         {
-            double average = _allNodes.Select(n => n.TimeSpentInQueue).Average();
+            double average = AllNodes.Select(n => n.TimeSpentInQueue).Average();
             
             WaitingTimeSimulationStatistics.Add((TimeCurrent, average));
         }

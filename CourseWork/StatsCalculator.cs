@@ -8,6 +8,11 @@ public static class StatsCalculator
     {
         return (model.Elements.First(el => el is EndServing) as EndServing)!;
     }
+    
+    private static Create GetCreate(NetMO model)
+    {
+        return (model.Elements.First(el => el is Create) as Create)!;
+    }
 
     public static List<double> GetRepairQualities(NetMO model)
     {
