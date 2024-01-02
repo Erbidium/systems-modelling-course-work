@@ -49,7 +49,7 @@ public static class StatsCalculator
 
         var waitingTimeRange = maxWaitingTime / waitingTimeRangesCount;
         var waitingFrequencies = new List<(double RangeStart, double RangeEnd, int Count)>();
-        for (double i = 0; i <= maxWaitingTime; i += waitingTimeRange)
+        for (double i = 0; i < maxWaitingTime; i += waitingTimeRange)
         {
             var rangeStart = i;
             var rangeEnd = i + waitingTimeRange;
